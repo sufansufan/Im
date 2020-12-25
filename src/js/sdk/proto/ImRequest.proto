@@ -1,0 +1,67 @@
+syntax = "proto3";
+import "ImCommon.proto";
+package com.jdyh.im.common.tcpprotocol.imrequest;
+option java_multiple_files = true;
+
+message ImRequest {
+    // 请求号 ，前端自定规则生成，响应时根据带回前端
+    string requestId = 1;
+}
+
+message ChatRequest {
+    ImRequest imRequest = 1;
+    // 聊天消息去向
+    string msgTo = 2;
+    // 聊天消息二级分类
+    uint32 msgSecondType = 3;
+    // 聊天消息类型
+    GroupType groupType = 4;
+    // 聊天消息内容
+    ChatMsg chatMsg = 5;
+}
+
+message OperationRequest {
+    ImRequest imRequest = 1;
+    // 需要操作的seqID
+    uint64 operationSeqId = 2;
+    // 操作类型
+    uint32 operationType = 3;
+}
+
+message PullHistoryRequest {
+    ImRequest imRequest = 1;
+    // 拉取历史起始消息
+    uint64 firstSeqId = 2;
+    // 拉取历史消息的会话ID
+    string msgTo = 3;
+    // 拉取历史消息的群组类型
+    GroupType groupType = 4;
+}
+
+message PullMsgRequest {
+    ImRequest imRequest = 1;
+    // 拉取消息起始sequenceID
+    uint64 lastSeqId = 2;
+}
+
+message PullRecentlyRequest {
+    ImRequest imRequest = 1;
+    // 拉取的最大条数
+    uint32 limit = 2;
+    // 拉取近几天的
+    uint32 days = 3;
+}
+
+/*登录请求信息*/
+message LoginInfoRequest {
+    ImRequest imRequest=1;
+    string deviceId = 2; // 设备ID
+    string token = 3; // 用户token,账号服务器登录时生成的Token
+    ClientType clientType = 4; // 客户端类型
+    ClientOS clientOS = 5; // 客户端操作系统
+    string appVersion = 6; // APP版本号
+}
+
+/*登出请求信息*/
+message LoginOutRequest {
+}

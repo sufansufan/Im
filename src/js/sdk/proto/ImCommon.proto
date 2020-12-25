@@ -1,0 +1,77 @@
+syntax = "proto3";
+package com.jdyh.im.common.tcpprotocol;
+option java_outer_classname = "ImCommon";
+
+message ChatMsg {
+    uint64 msgId = 1;
+    string content = 2;
+    string description = 3;
+    string remark = 4;
+    string deviceId = 5;
+    uint32 platform = 6;
+     repeated string atList=7;
+}
+
+message MsgBean {
+    uint64 sequenceId = 1;
+    MsgType msgType = 2;
+    uint32 msgSecondType = 3;
+    string msgFrom = 4;
+    string msgTo = 5;
+    GroupType groupType = 6;
+    uint64 timeStamp = 7;
+    ChatMsg chatMsg = 8;
+    OperationMsg operationMsgBase = 9;
+    SystemMsg systemMsg = 10;
+    uint32 unRead = 11;
+    bool readStatus = 12;
+    bool isDelete = 13;
+    bool isRevocation = 14;
+    string passthroughMsg=15;
+    string WorkMsg=16;
+    string conversationID=17;
+      bool checkStatus = 18;
+}
+
+message OperationMsg {
+    uint64 operationSeqId = 1;
+}
+
+message SystemMsg {
+    string userA = 1;
+    repeated string userB = 2;
+    string groupId = 3;
+}
+
+/*消息会话类型*/
+enum GroupType {
+    single = 0; //单聊
+    group = 1; //群聊
+    imwork = 2; //工作号
+    platform=3;// 平台号
+}
+
+/*消息类型*/
+enum MsgType {
+    chat = 0;
+    operation = 1;
+    system = 2;
+    passthrough = 3;
+    work = 4;
+}
+
+/*平台类型枚举*/
+enum ClientType {
+    app = 0; //1:app
+    web = 1; //2:web
+    pad = 2; //3:pad
+}
+
+/*平台操作系统枚举*/
+enum ClientOS {
+    android = 0; //1:android
+    ios = 1; //2:ios
+    windows = 2; //3:windows
+}
+
+

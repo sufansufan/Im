@@ -1,0 +1,8 @@
+syntax = "proto3";
+package com.jdyh.im.common.tcpprotocol.imnotify;
+option java_multiple_files = true;
+
+message ImNotify {
+    // 最新消息的sequenceID
+    uint64 lastseqId = 1;
+}

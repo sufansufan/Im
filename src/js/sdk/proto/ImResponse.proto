@@ -1,0 +1,59 @@
+syntax = "proto3";
+import "ImCommon.proto";
+package com.jdyh.im.common.tcpprotocol.imresponse;
+option java_multiple_files = true;
+
+message ImResponse {
+    // 请求时的requestID
+    string reponseId = 1;
+    uint32 code = 2; // 状态码
+    string msg = 3; // 描述信息
+}
+
+message ChatResponse {
+    ImResponse imResponse = 1;
+    //到达服务器时间
+    uint64 timeStamp =2;
+}
+
+message OperationResponse {
+    ImResponse imResponse = 1;
+    //到达服务器时间
+    uint64 timeStamp = 2;
+}
+
+
+message PullHistoryResponse {
+    ImResponse imResponse = 1;
+    repeated MsgBean msgList = 2;
+    //拉取历史消息的会话ID
+    string msgTo = 3;
+    //拉取历史消息的群组类型
+    GroupType groupType = 4;
+    //拉取历史起始消息
+    uint64 firstSeqId = 5;
+}
+
+message PullMsgResponse {
+    ImResponse imResponse = 1;
+    repeated MsgBean msgList = 2;
+    uint64 lastSeqId = 3;
+}
+
+message PullRecentlyResponse {
+    ImResponse imResponse = 1;
+    repeated MsgBean msgList = 2;
+    uint32 limit = 3;
+    uint32 days = 4;
+}
+
+/*登录响应信息*/
+message LoginInfoResponse {
+  ImResponse imResponse = 1;
+    uint32 heartTime = 2; // 心跳间隔时间
+
+}
+
+message HeartPing {
+    uint64 newestSeqID = 1;
+}
